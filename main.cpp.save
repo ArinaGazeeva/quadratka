@@ -4,6 +4,8 @@
 #include <ctype.h>
 #include "quadratka.h"
 
+//g++ main.cpp .\quadratka.cpp -o quadratka.exe
+
 double test_counting_roots[11][6] =     // a b c nRoots x1 x2
 {
     {1, 2, 1, 1, -1, -1},
