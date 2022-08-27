@@ -1,7 +1,4 @@
-/**
- * \file quadratka.h
- */
-
+#include "quadratka.cpp"
 /// all possible variants of the number of roots of the quadratic equation
 enum nRoots {
     NO_ROOTS,               ///< no one root

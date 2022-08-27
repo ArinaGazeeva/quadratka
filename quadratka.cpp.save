@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include "quadratka.h"
+#include "test.h"
 
 int counting_roots(const double a, const double b, const double c, double* const x1, double* const x2)
 {
@@ -22,6 +23,7 @@ int counting_roots(const double a, const double b, const double c, double* const
         *x2 = *x1;
         return ONE_ROOT;
     }
+
     else if (D > 0)
     {
         D = sqrt(D);
@@ -47,7 +49,7 @@ bool check_equality(const double a, const double b)
 void output(const int roots, const double x1, const double x2)
 {
     switch(roots)
-    {
+        {
         case NO_ROOTS :
             printf("There are no solutions\n");
             break;
@@ -66,7 +68,7 @@ void output(const int roots, const double x1, const double x2)
 
         default:
             assert(0 && "Undefined behavior");
-    }
+        }
 }
 
 int linear_equation(const double b, const double c, double* const x1, double* const x2)
@@ -75,6 +77,7 @@ int linear_equation(const double b, const double c, double* const x1, double* co
     {
         if (check_equality(c, 0))
             return INFIFNITY_ROOTS;
+
         else
             return NO_ROOTS;
     }
@@ -98,12 +101,12 @@ double check_input()
         if (!isspace(c))
             flag = 0;
     }
-
     if (n != 1 || flag == 0)
     {
         printf("Input error\n");
         input = check_input();
     }
-
     return input;
 }
+
+
