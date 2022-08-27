@@ -1,3 +1,5 @@
+#ifndef QUADRATKA_H
+#define QUADRATKA_H
 /**
  * \file quadratka.h
  */
@@ -69,3 +71,4 @@ int linear_equation(const double b, const double c, double* const x1, double* co
  * \note allows you to enter only the correct values, else it outputs an error
  */
 double check_input();
+#endif //QUADRATKA_H

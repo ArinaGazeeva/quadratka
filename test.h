@@ -1,3 +1,5 @@
+#ifndef TEST_H
+#define TEST_H
 /**
  * \brief - test function 'counting_roots'
  *
@@ -11,3 +13,4 @@ void testing_counting_roots();
  * \note display errors on tests and number of errors
  */
 void testing_linear();
+#endif //TEST_H
