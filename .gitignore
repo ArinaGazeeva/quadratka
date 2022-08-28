@@ -47,7 +47,7 @@
 *.cmd
 
 
-*.save
+*.cpp.save
 
 .tmp_versions/
 modules.order
