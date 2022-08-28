@@ -5,7 +5,7 @@
  *
  * \note display errors on tests and number of errors
  */
-void testing_counting_roots();
+void testing_solving_quadratic();
 
 /**
  * \brief - test function 'linear_equation'

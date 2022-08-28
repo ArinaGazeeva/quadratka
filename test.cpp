@@ -5,7 +5,8 @@
 #include "quadratka.h"
 #include "test.h"
 
-double test_counting_roots[11][6] =     // a b c nRoots x1 x2
+// static
+static const double test_solving_quadratic[][6] =     // a b c nRoots x1 x2
 {
     {1, 2, 1, 1, -1, -1},
     {1, 0, -4, 2, 2, -2},
@@ -17,10 +18,10 @@ double test_counting_roots[11][6] =     // a b c nRoots x1 x2
     {25, -2552, 0, 2, 102.08, 0},
     {25, 2552, 0, 2, 0, -102.08},
     {1, 4, 4, 1, -2,-2},
-    {465, -45, 463, 0, 0, 0},
+    {465, -45, 463, 0, 0, 0}
 };
 
-double test_linear[5][5] =             // b c nRoots x1 x2
+static const double test_linear[][5] =             // b c nRoots x1 x2
 {
     {23, 526, 1, -22.8695, -22.8695},
     {0, 0, -1, 0, 0},
@@ -28,21 +29,22 @@ double test_linear[5][5] =             // b c nRoots x1 x2
     {-5, 0, 1, 0, 0},
     {4, -100, 1, 25, 25}
 
-};
+}; // const
 
 void testing_linear()
 {
     int counter = 0;
+    int nTest = sizeof(test_linear)/sizeof(test_linear[0]);
 
-    for (int i = 0; i < 5; i++)
+    for (int test = 0; test < nTest; test++)
     {
         double b = 0, c = 0, x1 = 0, x2 = 0;
 
-        b = test_linear[i][0];
-        c = test_linear[i][1];
-        int rightRoots = test_linear[i][2];
-        double rightX1 = test_linear[i][3];
-        double rightX2 = test_linear[i][4];
+        b = test_linear[test][0];
+        c = test_linear[test][1];
+        int rightRoots = test_linear[test][2];
+        double rightX1 = test_linear[test][3];
+        double rightX2 = test_linear[test][4];
 
         int roots = linear_equation(b, c, &x1, &x2);
 
@@ -54,26 +56,27 @@ void testing_linear()
         }
     }
 
-    printf("Number of incorrect answers in 'testing_linear' is %d / 5\n", counter);
+    printf("Number of incorrect answers in 'testing_linear' is %d / %d\n", counter, nTest);
 }
 
 
-void testing_counting_roots()
+void testing_solving_quadratic()
 {
     int counter = 0;
+    int nTest = sizeof(test_solving_quadratic)/sizeof(test_solving_quadratic[0]);
 
-    for (int i = 0; i < 11; i++)
+    for (int test = 0; test < nTest; test++)
     {
         double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
 
-        a = test_counting_roots[i][0];
-        b = test_counting_roots[i][1];
-        c = test_counting_roots[i][2];
-        int rightRoots = test_counting_roots[i][3];
-        double rightX1 = test_counting_roots[i][4];
-        double rightX2 = test_counting_roots[i][5];
+        a = test_solving_quadratic[test][0];
+        b = test_solving_quadratic[test][1];
+        c = test_solving_quadratic[test][2];
+        int rightRoots = test_solving_quadratic[test][3];
+        double rightX1 = test_solving_quadratic[test][4];
+        double rightX2 = test_solving_quadratic[test][5];
 
-        int roots = counting_roots(a, b, c, &x1, &x2);
+        int roots = solving_quadratic(a, b, c, &x1, &x2);
 
         if (!(check_equality(roots, rightRoots) && check_equality(x1, rightX1) && check_equality(x2, rightX2)))
         {
@@ -82,5 +85,5 @@ void testing_counting_roots()
             roots, x1, x2, rightRoots, rightX1, rightX2);
         }
     }
-    printf("Number of incorrect answers in 'testing_counting_roots' is %d / 11\n", counter);
+    printf("Number of incorrect answers in 'testing_counting_roots' is %d / %d\n", counter, nTest);
 }

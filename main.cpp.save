@@ -5,58 +5,48 @@
 #include "quadratka.h"
 #include "test.h"
 
-//g++ main.cpp .\quadratka.cpp -o quadratka.exe
-//g++ main.cpp .\test.cpp -o quadratka.exe
-
+// cmd argument
+// file reading
 int main()
 {
-
+    int work_mode = 1;// rename
     double a = 0, b = 0, c = 0, x1 = 0, x2 = 0;
-    int answer = 1;
 
     do
     {
-        if (answer == 1 || answer == 2 || answer == 3)
+        if (work_mode == 1 || work_mode == 2 || work_mode == 3)
         {
             printf("If you want to solve your equation, write '1'\n" \
                     "if you want to start testing, write '2'\n"\
                     "if you want to stop the program, write '3'\n");
         }
 
-        answer = check_input();
+        work_mode = check_input();
 
-        if (answer == 1)
+        if (work_mode == 1)
         {
-            printf("Enter the coefficient a\n");
-            a = check_input();
-            printf("Enter the coefficient b\n");
-            b = check_input();
-            printf("Enter the coefficient c\n");
-            c = check_input();
+            enter_coefficient('a');
+            enter_coefficient('b')
+            enter_coefficient('c')
 
-            int roots = counting_roots(a, b, c, &x1, &x2);
+            int roots = solving_quadratic(a, b, c, &x1, &x2);
 
             output(roots, x1, x2);
-
         }
-
-        else if (answer == 2)
+        else if (work_mode == 2)
         {
-            testing_counting_roots();
+            testing_solving_quadratic();
             testing_linear();
         }
 
-        if (answer != 1 && answer != 2 && answer != 3)
+        if (work_mode != 1 && work_mode != 2 && work_mode != 3)
             printf("Input error\n");
 
 
 
-    } while (answer != 3);
+    } while (work_mode != 3);
 
     printf("Thanks for using!");
 
     return 0;
 }
-
-
-

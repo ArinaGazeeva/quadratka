@@ -3,16 +3,18 @@
 #include <assert.h>
 #include <ctype.h>
 #include "quadratka.h"
-#include "test.h"
 
-int counting_roots(const double a, const double b, const double c, double* const x1, double* const x2)
+int solving_quadratic(const double a, const double b, const double c, double* const x1, double* const x2)
 {
-    double D = 0;
-
     if (check_equality(a, 0))
         return linear_equation(b, c, x1, x2);
-
-    D = b*b - 4*a*c;
+    else if (check_equality(b, 0))
+        return zero_b(a, c, x1, x2);
+    else if (check_equality(c, 0))
+        return zero_c(a, b, x1, x2);
+    // x^2 + x = 0 -> x (x + 1) = 0
+    // x^2 - 4 = 0
+    double D = b*b - 4*a*c;
 
     if (D < 0)
         return NO_ROOTS;
@@ -23,7 +25,6 @@ int counting_roots(const double a, const double b, const double c, double* const
         *x2 = *x1;
         return ONE_ROOT;
     }
-
     else if (D > 0)
     {
         D = sqrt(D);
@@ -41,15 +42,14 @@ int counting_roots(const double a, const double b, const double c, double* const
 
 bool check_equality(const double a, const double b)
 {
-    const double inaccuracy = 1e-4;
+    const double INACCURACY = 1e-4;
 
-    return fabs(a - b) < inaccuracy;
-}
+    return fabs(a - b) < INACCURACY;
 
 void output(const int roots, const double x1, const double x2)
 {
     switch(roots)
-        {
+    {
         case NO_ROOTS :
             printf("There are no solutions\n");
             break;
@@ -68,7 +68,7 @@ void output(const int roots, const double x1, const double x2)
 
         default:
             assert(0 && "Undefined behavior");
-        }
+    }
 }
 
 int linear_equation(const double b, const double c, double* const x1, double* const x2)
@@ -77,7 +77,6 @@ int linear_equation(const double b, const double c, double* const x1, double* co
     {
         if (check_equality(c, 0))
             return INFIFNITY_ROOTS;
-
         else
             return NO_ROOTS;
     }
@@ -92,21 +91,60 @@ int linear_equation(const double b, const double c, double* const x1, double* co
 double check_input()
 {
     int flag = 1;
-    char c = 'a';
+    char checked_symbol;
     double input = 0;
 
-    int n = scanf("%lf", &input);
-    while ((c = getchar()) and !(c == '\n'))
+    int nInput = scanf("%lf", &input); // n -> возвращаемое знач сканфа
+    while ((checked_symbol = getchar()) and !(checked_symbol == '\n'))
     {
-        if (!isspace(c))
+        if (!isspace(checked_symbol))
             flag = 0;
     }
-    if (n != 1 || flag == 0)
+
+    if (nInput != 1 || flag == 0)
     {
         printf("Input error\n");
         input = check_input();
     }
+
     return input;
 }
 
+double enter_coefficient(char name_coef)
+{
+    printf("Enter the coefficient %c\n", name_coef);
+    return check_input();
+}
 
+int zero_b(const double a, const double c, double* const x1, double* const x2)
+{
+    double check_sqrt = (- c) / a;
+
+    if (check_sqrt < 0)
+        return NO_ROOTS;
+
+    else if (check_equality(check_sqrt, 0))
+    {
+        *x1 = 0;
+        *x2 = *x1;
+        return ONE_ROOT;
+    }
+
+    *x1 = sqrt(check_sqrt);
+    *x2 = -*x1;
+    return TWO_ROOTS;
+}
+
+int zero_c(const double a, const double b, double* const x1, double* const x2)
+{
+    *x1 = 0;
+    *x2 = (- b) / a;
+
+    if (*x2 > *x1)
+    {
+        double h = *x1;
+        *x1 = *x2;
+        *x2 = h;
+    }
+    return TWO_ROOTS;
+}

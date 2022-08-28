@@ -36,7 +36,7 @@ bool check_equality(const double a, const double b);
  *
  * \note equation a * x^2 + b * x + c = 0
  */
-int counting_roots(double a, double b, double c, double* x1, double* x2);
+int solving_quadratic(const double a, const double b, const double c, double* const x1, double* const x2);
 
 /**
  * \brief - outputs the results of solving the equation
@@ -71,4 +71,44 @@ int linear_equation(const double b, const double c, double* const x1, double* co
  * \note allows you to enter only the correct values, else it outputs an error
  */
 double check_input();
+
+/**
+ * \brief - enter coefficient of quadratic equation
+ *
+ * \param [in] name_coef - name of coefficient
+ *
+ * \return entering coefficient
+ *
+ * \note equation a * x^2 + b * x + c = 0
+ */
+double enter_coefficient(char name_coef);
+
+/**
+ * \brief - count roots of quadratic equation in case b = 0 and find them
+ *
+ * \param [in] a - x^2 coefficient
+ * \param [in] c - free term
+ * \param [out] x1 - 1 st root of equation
+ * \param [out] x2 - 2 st root of equation
+ *
+ * \return number of roots
+ *
+ * \note equation a * x^2 + c = 0 (b = 0)
+ */
+int zero_b(const double a, const double c, double* const x1, double* const x2);
+
+/**
+ * \brief - count roots of quadratic equation in case c = 0 and find them
+ *
+ * \param [in] a - x^2 coefficient
+ * \param [in] b - x coefficient
+ * \param [out] x1 - 1 st root of equation
+ * \param [out] x2 - 2 st root of equation
+ *
+ * \return number of roots
+ *
+ * \note equation a * x^2 + b * x = 0 (c = 0)
+ */
+int zero_c(const double a, const double b, double* const x1, double* const x2);
+
 #endif //QUADRATKA_H
