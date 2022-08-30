@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include "quadratka.h"
 #include "test.h"
-
 // static
 static const double test_solving_quadratic[][6] =     // a b c nRoots x1 x2
 {

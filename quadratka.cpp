@@ -6,15 +6,17 @@
 
 int solving_quadratic(const double a, const double b, const double c, double* const x1, double* const x2)
 {
-    assert((!isfinite(a)) || (!isfinite(b)) || (!isfinite(c)));
+    assert((isfinite(a)) || (isfinite(b)) || (isfinite(c)));
+
     if (check_equality(a, 0))
         return linear_equation(b, c, x1, x2);
+
     else if (check_equality(b, 0))
         return zero_b(a, c, x1, x2);
+
     else if (check_equality(c, 0))
         return zero_c(a, b, x1, x2);
-    // x^2 + x = 0 -> x (x + 1) = 0
-    // x^2 - 4 = 0
+
     double D = b*b - 4*a*c;
 
     if (D < 0)
@@ -92,7 +94,7 @@ int linear_equation(const double b, const double c, double* const x1, double* co
 
 double check_input()
 {
-    int flag = 1;
+    int check_space = 1;
     char checked_symbol;
     double input = 0;
 
@@ -100,10 +102,10 @@ double check_input()
     while ((checked_symbol = getchar()) and !(checked_symbol == '\n'))
     {
         if (!isspace(checked_symbol))
-            flag = 0;
+            check_space = 0;
     }
 
-    if (nInput != 1 || flag == 0)
+    if (nInput != 1 || check_space == 0)
     {
         printf("Input error\n");
         input = check_input();

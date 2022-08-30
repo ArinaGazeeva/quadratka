@@ -25,9 +25,9 @@ int main()
 
         if (work_mode == 1)
         {
-            enter_coefficient('a');
-            enter_coefficient('b');
-            enter_coefficient('c');
+            a = enter_coefficient('a');
+            b = enter_coefficient('b');
+            c = enter_coefficient('c');
 
             int roots = solving_quadratic(a, b, c, &x1, &x2);
 
